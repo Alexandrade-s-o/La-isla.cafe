@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Isla — Café · Picnic · Vivir sin afán</title>
+<meta name="description" content="La Isla: café de origen, picnics en el jardín y yoga al aire libre en La Macarena, Ibagué. Vivir sin afán.">
+<meta property="og:title" content="La Isla — Café · Picnic">
+<meta property="og:description" content="Una isla en medio de la ciudad. Café, picnics y yoga en Ibagué. Vivir sin afán 🌴">
+<meta property="og:image" content="images/ig/ig-01-picnic.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="alternate icon" type="image/png" href="images/logo.png">
+<link rel="preload" href="fonts/Mali-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/Mali-Bold.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+/* Una sola familia manuscrita para todos los textos de La Isla. */
+@font-face{font-family:'Mali';src:url('fonts/Mali-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'Mali';src:url('fonts/Mali-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
+button,input,select,textarea{font-family:inherit}
+
+:root{
+  --font-isla:'Mali','Trebuchet MS',sans-serif;
+  --crema:#FFF6E5; --tinta:#1E2A44; --azul:#2447A6; --amarillo:#F4B942;
+  --rosa:#E87A7A; --verde:#7BA05B;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--crema);color:var(--tinta);font-family:var(--font-isla);line-height:1.6;overflow-x:hidden;cursor:none}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ---------- cursor ---------- */
+.cursor{position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;background:var(--azul);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:0;transition:width .25s,height .25s,background .25s,opacity .2s;mix-blend-mode:multiply}
+.cursor.on{opacity:1}
+.cursor.grow{width:64px;height:64px;background:var(--amarillo)}
+@media (hover:none){.cursor{display:none}body{cursor:auto}}
+
+/* ---------- loader ---------- */
+#loader{position:fixed;inset:0;background:var(--crema);z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px 20px}
+#loader .word{width:clamp(126px,26vw,190px);line-height:1}
+.intro-wordmark{display:block;width:100%;height:auto}
+#loader .bar{width:180px;height:2px;background:rgba(36,71,166,.15);overflow:hidden;border-radius:2px}
+#loader .bar i{display:block;height:100%;width:100%;background:var(--amarillo);transform-origin:left;animation:intro-progress var(--intro-duration,3.6s) ease-in-out both}
+.intro-scene{width:min(82vw,48vh,420px);flex-shrink:0}
+.intro-caption{font-family:var(--font-isla);font-size:clamp(22px,4vw,28px);color:var(--azul);margin-bottom:8px}
+html.intro-active{overflow:hidden}
+@keyframes intro-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---------- progreso ---------- */
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:7000;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(20px,4vw,56px);mix-blend-mode:multiply;transition:color .3s}
+nav.light{color:var(--crema);mix-blend-mode:normal;text-shadow:0 1px 3px rgba(20,28,46,.85),0 0 14px rgba(20,28,46,.55)}
+nav.light::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,28,46,.45),rgba(20,28,46,0));z-index:-1}
+nav.light ul a::after{background:var(--amarillo)}
+nav.light #burger span{background:var(--crema)}
+nav .nav-wordmark{display:inline-block;width:auto;height:38px;vertical-align:middle;margin-left:4px}
+nav.light .nav-wordmark,nav.menu-open .nav-wordmark{filter:brightness(0) invert(1)}
+nav .logo{font-family:var(--font-isla);font-size:32px;font-weight:700;position:relative;z-index:7002}
+nav ul{display:flex;gap:clamp(14px,3vw,36px);list-style:none;font-size:14px;font-weight:600;letter-spacing:.04em}
+nav ul a{position:relative;padding:4px 0}
+nav ul a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--azul);transition:width .3s}
+nav ul a:hover::after{width:100%}
+#burger{display:none;flex-direction:column;gap:6px;background:none;border:0;cursor:pointer;z-index:7001;padding:6px}
+#burger span{width:28px;height:3px;background:var(--tinta);border-radius:2px;transition:.4s}
+#burger.open span:nth-child(1){transform:translateY(9px) rotate(45deg);background:var(--crema)}
+#burger.open span:nth-child(2){opacity:0}
+#burger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);background:var(--crema)}
+@media(max-width:640px){
+  nav ul{position:fixed;inset:0;background:var(--tinta);color:var(--crema);flex-direction:column;align-items:center;justify-content:center;gap:34px;font-size:26px;font-family:var(--font-isla);transform:translateY(-100%);transition:transform .55s cubic-bezier(.7,0,.3,1);z-index:6999;mix-blend-mode:normal}
+  nav ul.open{transform:translateY(0)}
+  nav.menu-open{color:var(--crema);mix-blend-mode:normal}
+  nav.menu-open #burger span{background:var(--crema)}
+  #burger{display:flex}
+}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(110px,15vh,160px) 20px clamp(60px,9vh,100px);position:relative;overflow:hidden}
+.hero .kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);font-weight:600;margin-bottom:clamp(56px,7vh,78px)}
+.hero-mark{position:relative;width:min(76vw,48vh,460px);aspect-ratio:1;display:grid;place-items:center;isolation:isolate}
+.hero-logo{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 34px rgba(30,42,68,.2));animation:bob 6.5s ease-in-out infinite;will-change:transform}
+.hero .sub{margin-top:clamp(28px,4.5vh,52px);font-family:var(--font-isla);font-size:clamp(26px,3.6vw,44px);color:var(--azul)}
+.hero-link{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(18px,3vh,30px);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--tinta);opacity:.72;transition:opacity .3s,gap .3s}
+.hero-link span{font-size:16px;transition:transform .3s}
+.hero-link:hover{opacity:1;gap:16px}
+.hero-link:hover span{transform:translateX(4px)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@media (prefers-reduced-motion:reduce){.hero-logo{animation:none}}
+
+/* ---------- Escena de playa en capas ---------- */
+.hero{isolation:isolate;background:linear-gradient(180deg,#FFF6E5 12%,#FFF0D9 57%,#E3EFEB 100%);padding-bottom:clamp(130px,17vh,180px)}
+.hero>.kicker,.hero>.hero-mark,.hero>.sub,.hero>.hero-link{z-index:2}
+.beach-scene{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.beach-defs{position:absolute}
+.beach-sun{position:absolute;right:14%;top:19%;width:clamp(100px,15vw,210px);aspect-ratio:1;border-radius:50%;background:linear-gradient(160deg,#F4B942,#ECA087);box-shadow:0 0 90px 30px #F4B94226;animation:beach-sunrise 2.4s ease-out both}
+.beach-horizon{position:absolute;inset:66% 0 0;background:linear-gradient(180deg,#A7D6D922, #A7D6D966);mask-image:linear-gradient(transparent,#000)}
+.beach-tree{position:absolute;bottom:45px;width:clamp(180px,27vw,420px);color:var(--azul);transform-origin:50% 100%}
+.beach-tree>svg{display:block;width:100%;overflow:visible;transform:scaleX(var(--facing,1)) rotate(var(--lean,0deg));transform-origin:50% 100%;animation:beach-sway 6s ease-in-out infinite alternate}
+.beach-tree .palm-crown{transform-origin:112px 76px}
+.tree-1{left:-6%;--lean:9deg}
+.tree-2{right:-7%;--facing:-1;--lean:10deg}
+.beach-shore{position:absolute;bottom:-1px;left:0;width:100%;height:clamp(105px,18vh,190px)}
+.shore-wave{animation:shore-flow 10s ease-in-out infinite alternate}
+.wave-front{animation-duration:7s;animation-direction:alternate-reverse}
+@keyframes beach-sway{from{transform:scaleX(var(--facing,1)) rotate(calc(var(--lean,0deg) - 2deg))}to{transform:scaleX(var(--facing,1)) rotate(calc(var(--lean,0deg) + 2deg))}}
+@keyframes shore-flow{from{transform:translateX(-80px)}to{transform:translateX(80px)}}
+@keyframes beach-sunrise{from{opacity:0;transform:translateY(55px) scale(.85)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:640px){
+  .beach-sun{right:5%;top:18%;width:100px}
+  .tree-1{left:-16%;bottom:6px;width:150px}
+  .tree-2{right:-17%;bottom:4px;width:155px}
+}
+@media(prefers-reduced-motion:reduce){
+  .beach-tree>svg,.beach-sun,.shore-wave{animation:none;opacity:1}
+}
+
+/* ---------- historia (story scroll) ---------- */
+.historia{position:relative}
+.historia .stage{height:100vh;position:sticky;top:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.historia .bg{position:absolute;inset:0}
+.historia .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.15)}
+.historia .bg img.on{opacity:1}
+.historia .veil{position:absolute;inset:0;background:rgba(30,42,68,.45)}
+.historia .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8vw;opacity:0}
+.historia .scene h2{font-family:var(--font-isla);font-weight:700;font-size:clamp(34px,6vw,80px);color:var(--crema);line-height:1.16;max-width:16ch}
+.historia .scene p{margin-top:22px;font-family:var(--font-isla);font-size:clamp(22px,3vw,34px);color:var(--amarillo)}
+.historia .counter{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);color:var(--crema);font-size:12px;letter-spacing:.3em;opacity:.7}
+
+/* ---------- galeria horizontal ---------- */
+.galeria{position:relative;background:var(--azul);color:var(--crema);overflow:hidden}
+.galeria .pinwrap{height:100vh;display:flex;align-items:center;overflow:hidden}
+.galeria .track{display:flex;gap:clamp(20px,3vw,48px);padding:0 8vw;will-change:transform}
+.gcard{flex:none;width:clamp(260px,34vw,460px)}
+.gcard .ph{height:clamp(320px,56vh,540px);border-radius:22px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.gcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.gcard:hover .ph img{transform:scale(1.08)}
+.gcard h3{margin-top:16px;font-family:var(--font-isla);font-size:clamp(20px,2.4vw,30px)}
+.gcard small{opacity:.7;font-family:var(--font-isla);font-size:20px}
+.galeria .gtitle{position:absolute;top:clamp(104px,13vh,134px);left:8vw;font-family:var(--font-isla);font-size:clamp(26px,3.4vw,44px);color:var(--amarillo);z-index:2}
+
+/* ---------- menu ---------- */
+.menu{padding:clamp(80px,12vh,150px) clamp(20px,6vw,90px);position:relative}
+.menu .head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:56px}
+.menu h2{font-family:var(--font-isla);font-weight:700;font-size:clamp(44px,8vw,110px);line-height:1.12}
+.menu .head p{font-family:var(--font-isla);font-size:clamp(22px,3vw,34px);color:var(--azul)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.mcard{background:#fff;border-radius:20px;padding:30px 28px;box-shadow:0 14px 34px rgba(30,42,68,.08);transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s;position:relative;overflow:hidden}
+.mcard::before{content:"";position:absolute;top:-40px;right:-40px;width:110px;height:110px;border-radius:50%;background:var(--amarillo);opacity:.25;transition:transform .5s}
+.mcard:hover{transform:translateY(-10px) rotate(-1deg);box-shadow:0 26px 50px rgba(30,42,68,.16)}
+.mcard:hover::before{transform:scale(1.6)}
+.mcard .cat{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rosa);font-weight:600}
+.mcard h3{font-family:var(--font-isla);font-size:26px;margin:10px 0 8px}
+.mcard p{font-size:14px;opacity:.7;line-height:1.55}
+.mcard .price{margin-top:16px;font-family:var(--font-isla);font-weight:700;font-size:22px;color:var(--azul)}
+
+/* ---------- experiencia ---------- */
+.exp{padding:clamp(90px,14vh,170px) clamp(20px,6vw,90px);background:linear-gradient(180deg,var(--crema),#FFE9C2);position:relative;overflow:hidden}
+.exp .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,6vw,90px);align-items:center}
+@media(max-width:860px){.exp .grid{grid-template-columns:1fr}}
+.exp h2{font-family:var(--font-isla);font-weight:700;font-size:clamp(40px,6.5vw,84px);line-height:1.12}
+.exp h2 em{font-style:normal;color:var(--azul)}
+.exp p{margin:24px 0 34px;font-size:16px;line-height:1.8;max-width:46ch}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--tinta);color:var(--crema);padding:16px 34px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s,background .3s}
+.btn:hover{background:var(--azul);transform:scale(1.05)}
+.btn.alt{background:var(--amarillo);color:var(--tinta)}
+.exp .imgs{position:relative;height:clamp(420px,60vh,600px)}
+.exp .imgs .pi{position:absolute;border-radius:18px;overflow:hidden;box-shadow:0 26px 60px rgba(30,42,68,.28)}
+.exp .imgs .pi img{width:100%;height:100%;object-fit:cover}
+.p1{width:62%;height:70%;top:0;left:0;z-index:2}
+.p2{width:52%;height:56%;bottom:0;right:0;z-index:3}
+.p3{width:34%;height:34%;top:8%;right:4%;z-index:1}
+
+/* ---------- info ---------- */
+.info{background:var(--tinta);color:var(--crema);padding:clamp(80px,12vh,150px) clamp(20px,6vw,90px)}
+.info .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px)}
+@media(max-width:760px){.info .cols{grid-template-columns:1fr}}
+.info h2{font-family:var(--font-isla);font-size:clamp(34px,5vw,64px);font-weight:700;margin-bottom:30px}
+.hrow{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px dashed rgba(255,246,229,.25);font-size:15px}
+.hrow b{font-family:var(--font-isla)}
+.info .addr{font-family:var(--font-isla);font-size:clamp(24px,3vw,34px);color:var(--amarillo);line-height:1.4}
+.info .mini{margin-top:26px;font-size:14px;opacity:.7;line-height:1.8}
+
+/* ---------- footer: la última orilla ---------- */
+.site-footer{position:relative;isolation:isolate;overflow:hidden;background:#1E2A44;color:var(--crema);padding:110px clamp(24px,6vw,90px) 74px;text-align:left;border:0}
+.footer-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto}
+.footer-incoming{position:absolute;left:0;top:-1px;width:100%;height:48px;pointer-events:none;color:#1D4556}
+.footer-top{display:grid;grid-template-columns:minmax(0,1fr) 230px;align-items:center;gap:60px;padding-bottom:58px}
+.footer-eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--mar)}
+.footer-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amarillo);flex:none}
+.footer-title{font-family:var(--font-isla);font-size:clamp(48px,6.8vw,88px);font-weight:600;line-height:1.12;letter-spacing:-.025em;margin:20px 0}
+.footer-title em{display:block;font-style:normal;color:var(--amarillo);font-weight:500}
+.footer-description{font-size:14px;line-height:1.8;color:#D1DCD9;max-width:38ch}
+.footer-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.footer-action{display:inline-flex;align-items:center;justify-content:center;gap:18px;min-height:48px;padding:13px 22px;border-radius:999px;border:1px solid #FFF6E54D;color:var(--crema);font-size:12px;font-weight:600;transition:background .25s,border-color .25s,transform .25s}
+.footer-action.primary{background:var(--amarillo);border-color:var(--amarillo);color:var(--tinta)}
+.footer-action svg{width:17px;height:17px;flex:none;transition:transform .25s}
+.footer-action:hover{background:#FFF6E510;border-color:var(--crema);transform:translateY(-2px)}
+.footer-action.primary:hover{background:#FFD079;border-color:#FFD079}
+.footer-action:hover svg{transform:translate(2px,-2px)}
+.footer-stamp{justify-self:end;text-align:center;transform:rotate(5deg)}
+.footer-stamp a{display:block;border-radius:50%;transition:transform .4s}
+.footer-stamp a:hover{transform:rotate(-5deg)}
+.footer-stamp img{width:210px;height:210px;filter:drop-shadow(0 12px 25px #0B172633)}
+.footer-stamp p{font-family:var(--font-isla);font-size:26px;color:var(--mar);margin-top:12px}
+.footer-details{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:42px;padding:34px 0 42px;border-top:1px solid #FFF6E52B;border-bottom:1px solid #FFF6E52B}
+.footer-heading{font-family:var(--font-isla);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mar);margin-bottom:16px}
+.footer-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px;max-width:260px}
+.footer-links a,.footer-text-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;width:fit-content;font-size:13px;line-height:1.5;transition:color .2s}
+.footer-links a:hover,.footer-text-link:hover{color:var(--amarillo)}
+.footer-address{font-style:normal;font-size:14px;line-height:1.8;color:var(--crema)}
+.footer-location .footer-text-link{margin-top:4px;color:var(--amarillo);font-size:12px;text-decoration:underline;text-underline-offset:5px;text-decoration-color:#F4B94266}
+.footer-social-link{display:flex;align-items:center;gap:12px;min-height:48px;width:fit-content;font-size:12px;font-weight:600;overflow-wrap:anywhere;transition:color .2s}
+.footer-social-link:hover{color:var(--amarillo)}
+.footer-social-icon{display:grid;place-items:center;width:42px;height:42px;flex:none;border:1px solid #FFF6E540;border-radius:50%;background:#FFF6E508}
+.footer-social-icon svg{width:19px;height:19px}
+.footer-social-note{max-width:28ch;font-family:var(--font-isla);font-size:23px;line-height:1.3;color:var(--mar);margin-top:13px}
+.footer-base{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 28px;padding-top:22px}
+.footer-copyright{font-size:11px;line-height:1.8;color:#B7C9CD;letter-spacing:.02em}
+.footer-back{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:11px;font-weight:600;white-space:nowrap;color:var(--crema)}
+.footer-back span{display:grid;place-items:center;width:32px;height:32px;border:1px solid #FFF6E540;border-radius:50%;font-size:16px;transition:background .2s,color .2s,transform .2s}
+.footer-back:hover span{background:var(--amarillo);border-color:var(--amarillo);color:var(--tinta);transform:translateY(-3px)}
+.site-footer a:focus-visible{outline:2px solid var(--amarillo);outline-offset:5px;border-radius:6px}
+.site-footer .island-palm{color:var(--mar);opacity:.07;bottom:-32px;width:260px}
+.site-footer .island-palm.left{left:-85px}
+.site-footer .island-palm.right{right:-80px}
+.footer-shore{position:absolute;left:-5%;bottom:-1px;width:110%;height:36px;pointer-events:none;fill:#99C9CD14}
+.footer-shore path{animation:footer-water 8s ease-in-out infinite alternate}
+.footer-shore path+path{animation-direction:alternate-reverse;animation-duration:6s;fill:#99C9CD10}
+@keyframes footer-water{from{transform:translateX(-18px)}to{transform:translateX(18px)}}
+@media(max-width:900px){
+ .footer-top{grid-template-columns:minmax(0,1fr) 180px;gap:32px}
+ .footer-stamp img{width:170px;height:170px}
+ .footer-details{gap:28px;grid-template-columns:1fr 1fr}
+ .footer-social{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0 28px;align-items:center}
+ .footer-social .footer-heading{grid-column:1/-1}
+ .footer-social-note{margin-top:0}
+}
+@media(max-width:540px){
+ .site-footer{padding:76px 24px 58px}
+ .footer-incoming{height:32px}
+ .footer-top{grid-template-columns:1fr;gap:28px;padding-bottom:34px}
+ .footer-stamp{order:-1;justify-self:start;display:flex;align-items:center;gap:18px;text-align:left;transform:none}
+ .footer-stamp img{width:112px;height:112px}
+ .footer-stamp p{margin:0;font-size:24px;max-width:10ch}
+ .footer-title{font-size:clamp(44px,11vw,58px);margin:16px 0}
+ .footer-eyebrow{font-size:10px;letter-spacing:.1em}
+ .footer-description{font-size:13px}
+ .footer-actions{gap:10px;margin-top:22px}
+ .footer-action{padding:12px 18px;font-size:11px;gap:12px}
+ .footer-details{gap:26px 20px;padding:28px 0}
+ .footer-links{grid-template-columns:1fr;gap:0}
+ .footer-links a{min-height:40px}
+ .footer-heading{font-size:10px;letter-spacing:.08em;margin-bottom:12px}
+ .footer-address{font-size:12px}
+ .footer-location .footer-text-link{font-size:11px}
+ .footer-social{display:block}
+ .footer-social-note{margin-top:10px;font-size:22px}
+ .footer-base{align-items:flex-start;gap:12px;padding-top:20px}
+ .footer-copyright{max-width:24ch}
+ .footer-back{font-size:10px;gap:7px}
+ .site-footer .island-palm{width:190px;opacity:.05}
+}
+@media(max-width:360px){.footer-action{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){.footer-shore path{animation:none}.site-footer a,.site-footer a svg,.footer-back span{transition:none}}
+.reveal{opacity:0;transform:translateY(60px)}
+
+/* ---------- La isla continúa: arena, mar y palmeras ---------- */
+:root{--arena:#F5DDAA;--mar:#99C9CD;--espuma:#D4E6D9}
+.historia .stage,.galeria,.menu,.exp,.info,footer{isolation:isolate}
+.menu,.info,footer{position:relative;overflow:hidden}
+.island-decor{position:absolute;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.island-palm{position:absolute;width:clamp(140px,21vw,300px);height:auto;bottom:20px;opacity:.16;color:var(--azul);transform-origin:50% 100%;animation:island-breeze 7s ease-in-out infinite alternate}
+.island-palm.left{left:-65px}
+.island-palm.right{right:-65px;scale:-1 1;animation-delay:-3s}
+.island-palm.far{width:clamp(100px,14vw,210px);bottom:24%;opacity:.09}
+.island-tide{position:absolute;left:-5%;width:110%;height:65px;bottom:-1px;color:var(--arena)}
+.island-tide.top{top:-1px;bottom:auto;rotate:180deg}
+.island-tide .tide-line{animation:island-tide 9s ease-in-out infinite alternate}
+.island-shell{position:absolute;width:52px;height:52px;right:7%;top:52px;color:var(--azul);opacity:.4;rotate:15deg}
+.island-sun{position:absolute;width:clamp(130px,20vw,270px);aspect-ratio:1;border-radius:50%;right:-3%;top:8%;background:linear-gradient(160deg,#F4B94250,#E87A7A12)}
+@keyframes island-breeze{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+@keyframes island-tide{from{transform:translateX(-28px)}to{transform:translateX(28px)}}
+/* La historia conserva el contraste de las fotografías. */
+.historia .veil{background:linear-gradient(180deg,rgba(30,42,68,.5),rgba(30,42,68,.4) 55%,rgba(30,42,68,.72))}
+.historia .island-decor{z-index:1}
+.historia .scene,.historia .counter{z-index:2}
+.historia .island-palm{color:var(--crema);opacity:.2;width:clamp(160px,24vw,350px)}
+.historia .island-tide{color:var(--azul);height:45px}
+/* Galería: mar profundo, espuma en la orilla. */
+.galeria{background:linear-gradient(150deg,#2447A6,#205D79)}
+.galeria .island-palm{color:var(--crema);opacity:.15}
+.galeria .island-tide{color:var(--crema)}
+/* Menú: papel cálido sobre la arena. */
+.menu{background:linear-gradient(180deg,var(--crema) 45%,#F7E8C9);padding-bottom:clamp(110px,15vh,180px)}
+.menu .head,.menu .mgrid{position:relative}
+.menu .mcard{background:#fffdf7;border:1px solid #E9D4AB80;box-shadow:0 14px 34px #A3834A12}
+.menu .mcard::before{background:var(--mar)}
+.menu .island-tide{color:var(--espuma)}
+/* Picnic: jardin tropical junto al agua. */
+.exp{background:linear-gradient(180deg,var(--espuma),#EFF0D9 55%,var(--crema));padding-top:clamp(100px,14vh,170px)}
+.exp .grid{position:relative}
+.exp .island-palm{bottom:-45px;opacity:.22}
+.exp .island-shell{top:auto;bottom:38px;right:46%}
+.exp .island-tide{color:var(--tinta);height:45px}
+/* Visítanos y cierre: la misma isla, al caer la tarde. */
+.info{background:linear-gradient(160deg,#1E2A44,#1D4556);padding-top:clamp(95px,14vh,165px)}
+.info .cols{position:relative}
+.info .island-palm{color:var(--mar);opacity:.18;width:clamp(180px,25vw,360px)}
+.info .island-shell{color:var(--amarillo);top:30px;right:48%;width:35px}
+.info .hrow{border-color:#99C9CD40}
+.info .island-tide{color:#1D4556}
+@media(max-width:640px){
+  .island-palm{width:145px;opacity:.12}
+  .island-palm.left{left:-65px}.island-palm.right{right:-65px}
+  .island-shell{width:34px;height:34px;right:6%;top:20px}
+  .island-tide{height:38px}
+  .historia .island-palm{width:165px;opacity:.16}
+  .exp .island-shell{right:12%;bottom:18px}
+  .info .island-shell{right:8%;top:22px}
+}
+@media(prefers-reduced-motion:reduce){.island-palm,.island-tide .tide-line{animation:none}}
+
+
+/* Surf solo en la pantalla de entrada; el hero conserva el logo original. */
+.intro-surfer{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 14px 20px #1E2A4410)}
+.beach-tree{bottom:-3px;opacity:1;transform:none}
+.island-palm,.island-palm.far{bottom:-12px}
+.historia .island-palm,.info .island-palm{bottom:-12px}
+.exp .island-palm{bottom:-12px}
+@media(max-width:640px){
+ .beach-tree{bottom:-3px}
+}
+
+/* ---------- mapa / cómo llegar ---------- */
+html.map-open,html.map-open body{overflow:hidden;overscroll-behavior:none}
+html.map-open,html.map-open body{cursor:auto}
+html.map-open a,html.map-open button{cursor:pointer}
+html.map-open .cursor{opacity:0}
+.map-modal{position:fixed;inset:0;z-index:9500;display:grid;place-items:center;padding:clamp(12px,3vw,44px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s}
+.map-modal.open{opacity:1;visibility:visible}
+.map-veil{position:absolute;inset:0;background:rgba(15,23,40,.66);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.map-panel{position:relative;display:flex;flex-direction:column;gap:clamp(12px,1.6vw,18px);width:min(960px,100%);max-height:calc(100vh - 2*clamp(12px,3vw,44px));max-height:calc(100dvh - 2*clamp(12px,3vw,44px));padding:clamp(18px,2.4vw,30px);border-radius:30px;background:var(--crema);box-shadow:0 50px 120px rgba(6,12,28,.5);transform:translateY(26px) scale(.985);opacity:.5;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .35s;overscroll-behavior:contain;overflow-y:auto}
+.map-modal.open .map-panel{transform:none;opacity:1}
+.map-close{position:absolute;top:clamp(12px,2vw,20px);right:clamp(12px,2vw,20px);z-index:2;display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(30,42,68,.14);border-radius:50%;background:#FFFDF7;color:var(--tinta);font-size:18px;line-height:1;cursor:pointer;transition:background .3s,color .3s,transform .4s}
+.map-close:hover{background:var(--tinta);color:var(--crema);transform:rotate(90deg)}
+.map-head{padding-right:52px}
+.map-kicker{font-family:var(--font-isla);font-size:clamp(20px,2vw,25px);color:var(--azul);line-height:1}
+.map-head h2{font-family:var(--font-isla);font-weight:700;font-size:clamp(32px,4.4vw,52px);line-height:1.15;color:var(--tinta);margin-top:6px}
+.map-addr{margin-top:10px;font-size:14px;line-height:1.55;color:var(--tinta);opacity:.72}
+.map-hint{margin-top:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);opacity:.7;font-weight:600}
+.map-journey{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"rail rail rail" "start meta end";align-items:center;gap:0 14px;padding:2px 2px 0}
+.journey-rail{grid-area:rail;display:flex;align-items:center;gap:10px}
+.journey-pin{flex:0 0 auto;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;line-height:1}
+.journey-pin.ref{background:var(--azul);color:var(--crema);font-family:var(--font-isla);font-weight:700;font-size:13px;box-shadow:0 0 0 3px rgba(36,71,166,.1)}
+.journey-pin.cafe{background:var(--amarillo);color:var(--tinta);box-shadow:0 0 0 3px rgba(240,192,64,.2)}
+.journey-pin svg{width:16px;height:16px}
+.journey-caption{display:flex;flex-direction:column;gap:0;min-width:0}
+.journey-caption.start{grid-area:start;justify-self:start;text-align:left}
+.journey-caption.end{grid-area:end;justify-self:end;text-align:right}
+.journey-caption small{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--azul);opacity:.62;line-height:1.2}
+.journey-caption b{font-family:var(--font-isla);font-size:21px;font-weight:700;color:var(--tinta);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.journey-track{position:relative;flex:1;height:42px;min-width:0}
+.journey-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.journey-line{fill:none;stroke:rgba(36,71,166,.36);stroke-width:2;stroke-linecap:round;stroke-dasharray:.5 7}
+.journey-progress{fill:none;stroke:var(--azul);stroke-width:2.5;stroke-linecap:round}
+.journey-walker{position:absolute;left:0;top:0;z-index:1;display:grid;place-items:center;width:27px;height:27px;border-radius:50%;border:1.5px solid var(--azul);background:var(--crema);color:var(--azul);transform:translate(-50%,-50%);box-shadow:0 0 0 3px rgba(240,192,64,.25),0 5px 12px rgba(30,42,68,.12);will-change:left,top}
+.journey-walker svg{width:15px;height:15px}
+.journey-meta{grid-area:meta;justify-self:center;font-family:var(--font-isla);font-size:15px;font-weight:600;line-height:1;color:var(--azul);opacity:.8;white-space:nowrap}
+.map-frame{position:relative;flex:0 0 auto;height:clamp(320px,46vh,480px);overflow:hidden;border-radius:20px;background:#E8E3D4;isolation:isolate}
+.map-frame::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid rgba(30,42,68,.12);pointer-events:none;z-index:1}
+.map-frame iframe{display:block;width:100%;height:100%;border:0;filter:sepia(.12) saturate(.9) contrast(.99)}
+.map-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--crema);font-family:var(--font-isla);font-size:23px;color:var(--azul);transition:opacity .45s;pointer-events:none}
+.map-loading img{width:64px;height:64px;border-radius:50%;box-shadow:0 10px 24px rgba(30,42,68,.14);animation:map-pulse 2s ease-in-out infinite}
+.map-loading.done{opacity:0}
+@keyframes map-pulse{0%,100%{transform:scale(.94)}50%{transform:scale(1.04)}}
+.map-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px}
+.map-actions .btn{padding:14px 28px;font-size:14px}
+.map-actions .btn span{font-size:16px}
+.map-alt{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--tinta);border-bottom:1px solid rgba(30,42,68,.22);padding:3px 0;transition:color .3s,border-color .3s}
+.map-alt:hover{color:var(--azul);border-color:var(--azul)}
+.map-copy{margin-left:auto;padding:4px 0;border:0;background:none;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--tinta);opacity:.55;cursor:pointer;transition:opacity .3s,color .3s}
+.map-copy:hover{opacity:1}
+.map-copy.copied{color:#4F7A50;opacity:1}
+.map-note{flex-basis:100%;margin-top:-2px;font-size:11px;line-height:1.5;color:var(--tinta);opacity:.55}
+.map-close:focus-visible,.map-actions a:focus-visible,.map-copy:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+@media(max-width:640px){
+  .map-modal{padding:10px 0 0;place-items:end center}
+  .map-panel{width:100%;height:calc(100vh - 10px);height:calc(100dvh - 10px);max-height:none;border-radius:26px 26px 0 0;padding:20px 16px calc(16px + env(safe-area-inset-bottom));gap:14px}
+  .map-head{padding-right:48px}
+  .map-head h2{font-size:34px}
+  .map-addr{font-size:13px}
+  .map-hint{font-size:10px}
+  .map-journey{grid-template-columns:auto 1fr auto;grid-template-areas:"rail rail rail" "start meta end";column-gap:8px;padding:0}
+  .journey-caption small{display:none}
+  .journey-caption b{font-size:15px}
+  .journey-rail{gap:8px}
+  .journey-pin{width:26px;height:26px}
+  .journey-pin.ref{font-size:12px}
+  .journey-pin svg{width:14px;height:14px}
+  .journey-track{height:34px}
+  .journey-walker{width:24px;height:24px}
+  .journey-walker svg{width:13px;height:13px}
+  .journey-meta{font-size:12px}
+  .map-frame{flex:1 1 auto;height:auto;min-height:220px;border-radius:16px}
+  .map-actions{gap:12px}
+  .map-actions .btn{width:100%;justify-content:center}
+  .map-copy{margin-left:0}
+  .map-close{top:14px;right:14px;width:40px;height:40px}
+}
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<div id="loader" role="status" aria-label="Entrando a La Isla">
+  <div class="intro-scene" aria-hidden="true">
+    <img id="introSurfer" class="intro-surfer" src="images/intro-surfer.svg" width="520" height="420" alt="La chica de La Isla surfeando en una tabla amarilla entre olas">
+  </div>
+  <div class="word"><img class="intro-wordmark" src="images/logo-wordmark.svg" alt="La Isla" width="678" height="283"></div>
+  <p class="intro-caption">una ola de calma…</p>
+  <div class="bar" aria-hidden="true"><i id="lbar"></i></div>
+</div>
+
+<nav>
+  <div class="logo"><img src="images/logo.svg" alt="La Isla" style="height:46px;width:46px;border-radius:50%;display:inline-block;vertical-align:middle"> <img class="nav-wordmark" src="images/logo-wordmark.svg" alt="" aria-hidden="true" width="678" height="283"></div>
+  <button id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+  <ul id="navlist">
+    <li><a href="#historia" data-hover>Historia</a></li>
+    <li><a href="#galeria" data-hover>Galería</a></li>
+    <li><a href="#menu" data-hover>Menú</a></li>
+    <li><a href="#experiencia" data-hover>Picnic</a></li>
+    <li><a href="#info" data-hover>Visítanos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="inicio">
+  <div class="beach-scene" aria-hidden="true">
+    <svg class="beach-defs" width="0" height="0"><defs><symbol id="beach-palm" viewBox="0 0 220 300">
+      <path d="M91 273C111 216 125 139 112 76M109 273C128 211 139 138 119 78"/>
+      <path d="M103 239l14 4M111 210l14 4M117 180l14 4M120 150l13 3M120 122l11 2" stroke-width="2"/>
+      <g class="palm-crown">
+        <path d="M114 77C80 37 36 45 15 79C51 59 79 66 114 77Z" fill="var(--crema)"/>
+        <path d="M114 77C72 71 39 96 34 132C57 104 85 88 114 77Z" fill="var(--crema)"/>
+        <path d="M114 77C90 93 80 119 89 150C95 119 107 99 114 77Z" fill="var(--crema)"/>
+        <path d="M114 77C118 30 146 15 176 23C146 33 131 53 114 77Z" fill="var(--crema)"/>
+        <path d="M114 77C151 42 193 54 208 85C174 68 145 71 114 77Z" fill="var(--crema)"/>
+        <path d="M114 77C157 79 183 109 179 145C166 112 145 94 114 77Z" fill="var(--crema)"/>
+        <path d="M114 77C92 48 94 24 106 12C104 37 111 54 114 77Z" fill="var(--crema)"/>
+        <circle cx="109" cy="85" r="7" fill="var(--amarillo)"/>
+        <circle cx="122" cy="87" r="7" fill="var(--amarillo)"/>
+      </g>
+      <path d="M60 278C86 269 117 270 145 278" stroke-width="2"/>
+    </symbol></defs></svg>
+    <div class="beach-sun"></div>
+    <div class="beach-horizon"></div>
+    <div class="beach-tree tree-1"><svg viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg></div>
+    <div class="beach-tree tree-2"><svg viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg></div>
+    <svg class="beach-shore" viewBox="0 0 1440 190" preserveAspectRatio="none">
+      <path class="shore-wave wave-back" d="M-480 70Q-240 15 0 70T480 70T960 70T1440 70T1920 70V200H-480Z" fill="#99C9CD"/>
+      <path class="shore-wave wave-front" d="M-480 105Q-240 55 0 105T480 105T960 105T1440 105T1920 105V200H-480Z" fill="#D4E6D9"/>
+      <path d="M0 146Q360 110 720 152T1440 140V200H0Z" fill="#F5DDAA"/>
+      <path d="M80 160q70-12 130-3M1100 163q90-15 180-5" fill="none" stroke="#FFF6E5" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p class="kicker reveal">Café · Picnic · Ibagué</p>
+  <div class="hero-mark">
+    <img id="heroLogo" class="hero-logo" src="images/logo-hero.svg" alt="La Isla — Café Picnic: una mujer descansando en una taza junto a una palmera" width="512" height="512" fetchpriority="high">
+  </div>
+  <p class="sub reveal">~ vivir sin afán ~</p>
+  <a class="hero-link reveal" data-hover href="#historia">conocer la isla <span>→</span></a>
+</header>
+
+<!-- HISTORIA: story scroll -->
+<section class="historia" id="historia">
+  <div class="stage" id="stage">
+    <div class="island-decor" aria-hidden="true"><svg class="island-palm left" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-palm right" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-tide" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor"><path opacity=".3" class="tide-line" d="M-100 40Q100 0 300 40T700 40T1100 40T1500 40V100H-100Z"/><path d="M-100 60Q100 25 300 60T700 60T1100 60T1500 60V100H-100Z"/></svg></div>
+    <div class="bg">
+      <img src="images/ig/ig-08-playa.jpg" id="bg1" class="on" alt="Letrero de La Isla entre plantas">
+      <img src="images/ig/ig-06-mesa.jpg" id="bg2" alt="Mesas de La Isla bajo el mural">
+      <img src="images/ig/ig-01-picnic.jpg" id="bg3" alt="Picnic montado en el jardín de La Isla">
+    </div>
+    <div class="veil"></div>
+    <div class="scene" data-i="0">
+      <h2>Había una vez una isla en medio de la ciudad</h2>
+      <p>lejos del ruido, cerca de ti…</p>
+    </div>
+    <div class="scene" data-i="1">
+      <h2>Donde el café se toma descalzo y el tiempo se estira como sombra de palma</h2>
+      <p>un picnic, un libro, un atardecer…</p>
+    </div>
+    <div class="scene" data-i="2">
+      <h2>Bienvenido a tu isla. Aquí no hay prisa — hay presente</h2>
+      <p>🏝️ LA ISLA · Café · Picnic</p>
+    </div>
+    <div class="counter"><span id="cnum">01</span> / 03</div>
+  </div>
+</section>
+
+<!-- GALERÍA horizontal -->
+<section class="galeria" id="galeria">
+  <div class="island-decor" aria-hidden="true"><svg class="island-palm left" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-palm right" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-tide" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor"><path opacity=".3" class="tide-line" d="M-100 40Q100 0 300 40T700 40T1100 40T1500 40V100H-100Z"/><path d="M-100 60Q100 25 300 60T700 60T1100 60T1500 60V100H-100Z"/></svg></div>
+  <div class="pinwrap" id="gpin">
+    <div class="gtitle">momentos de la isla →</div>
+    <div class="track" id="gtrack">
+      <div class="gcard"><div class="ph"><img src="images/ig/ig-01-picnic.jpg" alt="picnic en el jardín"></div><h3>Picnics en el jardín</h3><small>mantas, cojines y flores</small></div>
+      <div class="gcard"><div class="ph"><img src="images/ig/ig-03-cafe.jpg" alt="café frío de La Isla"></div><h3>Café de la isla</h3><small>frío o caliente, sin afán</small></div>
+      <div class="gcard"><div class="ph"><img src="images/ig/ig-05-foto.jpg" alt="sándwich Selva Costera"></div><h3>Hecho a mano</h3><small>sándwich Selva Costera</small></div>
+      <div class="gcard"><div class="ph"><img src="images/ig/ig-06-mesa.jpg" alt="mesas bajo el mural"></div><h3>Rincones con alma</h3><small>mesas bajo el mural</small></div>
+      <div class="gcard"><div class="ph"><img src="images/ig/ig-07-foto.jpg" alt="cóctel Puesta de Sol"></div><h3>Atardecer en vaso</h3><small>cócteles de la casa</small></div>
+      <div class="gcard"><div class="ph"><img src="images/ig/ig-02-surf.jpg" alt="letrero de La Isla"></div><h3>El menú viaja</h3><small>letreros de La Isla</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ -->
+<section class="menu" id="menu">
+  <div class="island-decor" aria-hidden="true"><svg class="island-palm left" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-palm right far" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-tide" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor"><path opacity=".3" class="tide-line" d="M-100 40Q100 0 300 40T700 40T1100 40T1500 40V100H-100Z"/><path d="M-100 60Q100 25 300 60T700 60T1100 60T1500 60V100H-100Z"/></svg><span class="island-sun"></span><svg class="island-shell" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 49C12 41 4 27 10 21q4-6 9-4q2-10 11-10t11 10q5-2 9 4c6 6-2 20-14 28Z"/><path d="M30 12v32M19 21l8 23M41 21l-8 23M12 26l12 19M48 26L36 45M24 49v4h12v-4"/></svg></div>
+  <div class="head">
+    <h2 class="reveal">Menú<br>de la isla</h2>
+    <p class="reveal">todo se disfruta mejor sin afán ☕</p>
+  </div>
+  <div class="mgrid">
+    <div class="mcard reveal"><span class="cat">Clásicos</span><h3>Café de la Isla</h3><p>Tinto de origen tolimense servido en taza grande, para tomarse sin mirar el reloj.</p><div class="price">$4.000</div></div>
+    <div class="mcard reveal"><span class="cat">Especiales</span><h3>Latte Palmera</h3><p>Espresso, leche cremosa y arte latte con diseño de palmera. Pídelo caliente o frío.</p><div class="price">$7.000</div></div>
+    <div class="mcard reveal"><span class="cat">Fríos</span><h3>Cold Brew del Atardecer</h3><p>Extracción lenta en frío por 18 horas. Suave, dulce y refrescante.</p><div class="price">$8.000</div></div>
+    <div class="mcard reveal"><span class="cat">Para compartir</span><h3>Picnic para Dos</h3><p>Manta, cojines, frutas de temporada, sándwiches y dos bebidas a elegir.</p><div class="price">$45.000</div></div>
+    <div class="mcard reveal"><span class="cat">Dulces</span><h3>Tostada Tropical</h3><p>Pan artesanal, queso, mermelada de maracuyá y toque de miel.</p><div class="price">$9.000</div></div>
+    <div class="mcard reveal"><span class="cat">Experiencias</span><h3>Yoga con La Isla</h3><p>Clases de yoga al aire libre + café de bienvenida. Consulta el calendario en Instagram.</p><div class="price">$15.000</div></div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section class="exp" id="experiencia">
+  <div class="island-decor" aria-hidden="true"><svg class="island-palm left" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-palm right" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-tide" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor"><path opacity=".3" class="tide-line" d="M-100 40Q100 0 300 40T700 40T1100 40T1500 40V100H-100Z"/><path d="M-100 60Q100 25 300 60T700 60T1100 60T1500 60V100H-100Z"/></svg><span class="island-sun"></span><svg class="island-shell" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 49C12 41 4 27 10 21q4-6 9-4q2-10 11-10t11 10q5-2 9 4c6 6-2 20-14 28Z"/><path d="M30 12v32M19 21l8 23M41 21l-8 23M12 26l12 19M48 26L36 45M24 49v4h12v-4"/></svg></div>
+  <div class="grid">
+    <div>
+      <h2 class="reveal">Reserva tu <em>picnic</em> soñado</h2>
+      <p class="reveal">Cuéntanos la ocasión — cumpleaños, aniversario, propuesta o simple ganas de desconectarte — y montamos tu rincón perfecto: mantas, velas, flores, comida y la mejor banda sonora: el viento entre las palmas.</p>
+      <div class="reveal" style="display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn" data-hover href="https://wa.me/573000000000?text=Hola%20La%20Isla%20%F0%9F%8C%B4%20quiero%20reservar%20un%20picnic" target="_blank" rel="noopener">Reservar por WhatsApp 💬</a>
+        <a class="btn alt" data-hover href="https://instagram.com/laislacafepicnic" target="_blank" rel="noopener">Ver Instagram</a>
+      </div>
+    </div>
+    <div class="imgs">
+      <div class="pi p1" data-speed="-60"><img src="images/ig/ig-01-picnic.jpg" alt="picnic jardín"></div>
+      <div class="pi p2" data-speed="60"><img src="images/ig/ig-07-foto.jpg" alt="cóctel de la casa"></div>
+      <div class="pi p3" data-speed="-30"><img src="images/ig/ig-05-foto.jpg" alt="sándwich de la isla"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section class="info" id="info">
+  <div class="island-decor" aria-hidden="true"><svg class="island-palm left" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-palm right" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg><svg class="island-tide" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor"><path opacity=".3" class="tide-line" d="M-100 40Q100 0 300 40T700 40T1100 40T1500 40V100H-100Z"/><path d="M-100 60Q100 25 300 60T700 60T1100 60T1500 60V100H-100Z"/></svg><svg class="island-shell" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 49C12 41 4 27 10 21q4-6 9-4q2-10 11-10t11 10q5-2 9 4c6 6-2 20-14 28Z"/><path d="M30 12v32M19 21l8 23M41 21l-8 23M12 26l12 19M48 26L36 45M24 49v4h12v-4"/></svg></div>
+  <div class="cols">
+    <div>
+      <h2 class="reveal">Horarios 🌞</h2>
+      <div class="hrow reveal"><span>Lunes — Jueves</span><b>2:00 pm – 8:00 pm</b></div>
+      <div class="hrow reveal"><span>Viernes — Sábado</span><b>2:00 pm – 9:00 pm</b></div>
+      <div class="hrow reveal"><span>Domingos y festivos</span><b>descansamos en la isla 🏖️</b></div>
+    </div>
+    <div>
+      <h2 class="reveal">Dónde estamos 📍</h2>
+      <p class="addr reveal">Cra 4c # 41-25, La Macarena parte baja<br>Ibagué, Colombia — cerca a la Universidad del Tolima</p>
+      <p class="mini reveal">A 7 minutos a pie de la Universidad del Tolima: cruza la 4c bajando y sigue el olor a café. Estamos donde empieza la calma.</p>
+      <div class="reveal" style="margin-top:26px"><a class="btn alt" data-hover id="openMap" href="https://www.google.com/maps/search/?api=1&amp;query=La%20Isla%20caf%C3%A9%20picnic%2C%20Ibagu%C3%A9%2C%20Colombia" target="_blank" rel="noopener" aria-haspopup="dialog" aria-controls="mapModal">Cómo llegar 🗺️</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" aria-label="La Isla — enlaces e información">
+  <svg class="footer-incoming" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V12C1160 62 930 3 720 23S270 63 0 12Z" fill="currentColor"/></svg>
+  <div class="island-decor" aria-hidden="true">
+    <svg class="island-palm left" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg>
+    <svg class="island-palm right" viewBox="0 0 220 300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#beach-palm"/></svg>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-lead">
+        <p class="footer-eyebrow">Un rincón para volver</p>
+        <h2 class="footer-title">Nos vemos <em>sin afán.</em></h2>
+        <p class="footer-description">Café, jardín y buenos momentos en medio de Ibagué.</p>
+        <div class="footer-actions">
+          <a class="footer-action primary" data-hover href="#info">Ven a la isla <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+          <a class="footer-action" data-hover href="https://instagram.com/laislacafepicnic" target="_blank" rel="noopener">Ver Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-stamp">
+        <a href="#inicio" aria-label="La Isla — volver al inicio" data-hover><img src="images/logo-hero.svg" alt="La Isla · Café Picnic" width="210" height="210" loading="lazy"></a>
+        <p>hecho con café<br>y un poquito de sol</p>
+      </div>
+    </div>
+    <div class="footer-details">
+      <div class="footer-explore">
+        <h3 class="footer-heading">Descubre la isla</h3>
+        <div class="footer-links" role="navigation" aria-label="Explorar La Isla">
+          <a href="#historia" data-hover>Historia</a>
+          <a href="#galeria" data-hover>Galería</a>
+          <a href="#menu" data-hover>El menú</a>
+          <a href="#experiencia" data-hover>Tu picnic</a>
+        </div>
+      </div>
+      <div class="footer-location">
+        <h3 class="footer-heading">Aquí nos encuentras</h3>
+        <address class="footer-address">Cra. 4c #41-25<br>La Macarena parte baja<br>Ibagué, Colombia</address>
+        <a class="footer-text-link" href="#info" data-hover>Horarios y ubicación <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="footer-social">
+        <h3 class="footer-heading">Sigamos cerca</h3>
+        <a class="footer-social-link" href="https://instagram.com/laislacafepicnic" target="_blank" rel="noopener" data-hover><span class="footer-social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span>@laislacafepicnic</span></a>
+        <p class="footer-social-note">Un pedacito de la isla,<br>dondequiera que estés.</p>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p class="footer-copyright">© 2026 La Isla · Café Picnic<br>Hecho sin afán en Ibagué.</p>
+      <a class="footer-back" href="#inicio" data-hover>Volver arriba <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+  <svg class="footer-shore" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 20Q100 0 300 20T700 20T1100 20T1540 20V50H-80Z"/><path d="M-80 30Q100 12 300 30T700 30T1100 30T1540 30V50H-80Z"/></svg>
+</footer>
+
+<!-- Mapa interactivo: cómo llegar -->
+<div class="map-modal" id="mapModal" role="dialog" aria-modal="true" aria-labelledby="mapTitle" aria-describedby="mapAddr" aria-hidden="true">
+  <div class="map-veil" data-map-close></div>
+  <div class="map-panel" role="document">
+    <button class="map-close" id="mapClose" type="button" aria-label="Cerrar el mapa">✕</button>
+    <div class="map-head">
+      <p class="map-kicker">la isla te espera</p>
+      <h2 id="mapTitle">Cómo llegar</h2>
+      <p class="map-addr" id="mapAddr">La isla café picnic<br>Cra 4c #41-25, La Macarena parte baja · Ibagué, Tolima</p>
+      <p class="map-hint">Arrastra, acerca y explora el mapa</p>
+    </div>
+    <div class="map-journey" role="group" aria-label="Ruta a pie desde la Universidad del Tolima hasta La isla café picnic: 7 minutos, 450 metros">
+      <div class="journey-rail" aria-hidden="true">
+        <span class="journey-pin ref">U</span>
+        <div class="journey-track">
+          <svg class="journey-svg" viewBox="0 0 240 44" preserveAspectRatio="none">
+            <path id="journeyPath" class="journey-line" d="M4 30 C 34 30 46 15 76 15 S 128 31 154 23 S 202 13 236 18"/>
+            <path id="journeyProgress" class="journey-progress" d="M4 30 C 34 30 46 15 76 15 S 128 31 154 23 S 202 13 236 18"/>
+          </svg>
+          <span class="journey-walker" id="journeyCup">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5h9.5v5a4 4 0 0 1-4 4h-1.5a4 4 0 0 1-4-4v-5Z"/><path d="M16 10.8h1.1a2.1 2.1 0 0 1 0 4.2H16"/><path d="M9.2 6.6c-.7.9.7 1.5 0 2.4M12.4 6.6c-.7.9.7 1.5 0 2.4"/></svg>
+          </span>
+        </div>
+        <span class="journey-pin cafe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5h9.5v5a4 4 0 0 1-4 4h-1.5a4 4 0 0 1-4-4v-5Z"/><path d="M16 10.8h1.1a2.1 2.1 0 0 1 0 4.2H16"/><path d="M9.2 6.6c-.7.9.7 1.5 0 2.4M12.4 6.6c-.7.9.7 1.5 0 2.4"/></svg>
+        </span>
+      </div>
+      <div class="journey-caption start">
+        <small>punto de referencia</small><b>Universidad del Tolima</b>
+      </div>
+      <div class="journey-meta">7 min · 450 m a pie</div>
+      <div class="journey-caption end">
+        <small>nuestro rincón</small><b>La isla café picnic</b>
+      </div>
+    </div>
+    <div class="map-frame" id="mapFrame">
+      <div class="map-loading" id="mapLoading" aria-hidden="true">
+        <img src="images/logo.svg" alt="" width="64" height="64">
+        <span>cargando el mapa…</span>
+      </div>
+    </div>
+    <div class="map-actions">
+      <a class="btn" id="mapRoute" href="https://www.google.com/maps/dir/?api=1&amp;destination=La%20Isla%20caf%C3%A9%20picnic%2C%20Cra.%204c%20%2341-25%2C%20Ibagu%C3%A9%2C%20Tolima%2C%20Colombia" target="_blank" rel="noopener">Trazar mi ruta <span>➜</span></a>
+      <a class="map-alt" id="mapPlace" href="https://www.google.com/maps/search/?api=1&amp;query=La%20Isla%20caf%C3%A9%20picnic%2C%20Cra.%204c%20%2341-25%2C%20Ibagu%C3%A9%2C%20Tolima%2C%20Colombia" target="_blank" rel="noopener">Abrir en Google Maps</a>
+      <button class="map-copy" id="mapCopy" type="button" aria-live="polite">Copiar dirección</button>
+      <p class="map-note">La caminata desde la Universidad del Tolima toma unos 7 minutos (450 m). Si el mapa no carga, abre la ruta en Google Maps.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Intro breve: termina aunque las bibliotecas externas no estén disponibles. */
+window.islaIntroFinished = new Promise(resolve => {
+  const loader = document.getElementById('loader');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const duration = reducedMotion ? 350 : 3600;
+  const content = [...document.body.children].filter(el =>
+    el !== loader && !['SCRIPT', 'STYLE'].includes(el.tagName));
+  document.documentElement.classList.add('intro-active');
+  content.forEach(el => el.inert = true);
+  loader.style.setProperty('--intro-duration', duration + 'ms');
+  const finish = () => {
+    loader.remove();
+    document.documentElement.classList.remove('intro-active');
+    content.forEach(el => el.inert = false);
+    resolve();
+  };
+  window.setTimeout(() => {
+    if (!loader.animate) { finish(); return; }
+    const exit = loader.animate(
+      reducedMotion ? [{opacity:1}, {opacity:0}] :
+        [{opacity:1, transform:'translateY(0)'}, {opacity:0, transform:'translateY(-5%)'}],
+      {duration:reducedMotion ? 150 : 650, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
+    exit.finished.then(finish, finish);
+  }, duration);
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---- smooth scroll (Lenis) ---- */
+const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); lenis.scrollTo(t, {offset:0, duration:1.6}); }
+  });
+});
+
+/* ---- cursor ---- */
+const cur = document.getElementById('cursor');
+window.addEventListener('mousemove', e=>{ cur.classList.add('on'); gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.35,ease:'power3.out'}); });
+document.querySelectorAll('[data-hover], a, .mcard, .gcard').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('grow'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));
+});
+
+/* ---- nav clara sobre fondos oscuros ---- */
+const navEl = document.querySelector('nav');
+const darkZones = document.querySelectorAll('.historia, .galeria, .info, footer');
+const updateNavTone = () => {
+  const y = 46;
+  const onDark = [...darkZones].some(el => {
+    const r = el.getBoundingClientRect();
+    return r.top <= y && r.bottom >= y;
+  });
+  navEl.classList.toggle('light', onDark);
+};
+lenis.on('scroll', updateNavTone);
+window.addEventListener('scroll', updateNavTone, { passive: true });
+window.addEventListener('resize', updateNavTone);
+updateNavTone();
+
+/* ---- entrada de la web después de la intro de surf ---- */
+if (document.getElementById('loader')) lenis.stop();
+window.islaIntroFinished.then(() => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  lenis.start();
+  ScrollTrigger.refresh();
+  gsap.fromTo('.hero .reveal',{y:reducedMotion ? 0 : 35,opacity:0},
+    {y:0,opacity:1,duration:reducedMotion ? .15 : .85,stagger:reducedMotion ? 0 : .12,ease:'power3.out'});
+  gsap.fromTo('.hero-mark',{scale:reducedMotion ? 1 : .9,opacity:0},
+    {scale:1,opacity:1,duration:reducedMotion ? .15 : 1.1,ease:'power3.out'});
+});
+
+/* ---- HISTORIA: story scroll (pinned, 3 actos) ---- */
+const scenes = gsap.utils.toArray('.historia .scene');
+const bgs = [document.getElementById('bg1'),document.getElementById('bg2'),document.getElementById('bg3')];
+const cnum = document.getElementById('cnum');
+scenes.forEach((s,i)=>{ if(i===0) gsap.set(s,{opacity:1}); else gsap.set(s,{opacity:0,y:60}); });
+
+const tl = gsap.timeline({
+  scrollTrigger:{
+    trigger:'.historia', start:'top top', end:'+=300%', pin:'#stage', scrub:.6,
+    onUpdate(self){
+      const idx = Math.min(2, Math.floor(self.progress*3));
+      cnum.textContent = '0'+(idx+1);
+      bgs.forEach((b,i)=>b.classList.toggle('on', i===idx));
+    }
+  }
+});
+tl.to(bgs[0],{scale:1,duration:3},0);
+tl.to(scenes[0],{opacity:0,y:-60,duration:1},'+=0.5')
+  .fromTo(scenes[1],{opacity:0,y:60},{opacity:1,y:0,duration:1},'<0.3')
+  .to(bgs[1],{scale:1,duration:2},'<')
+  .to(scenes[1],{opacity:0,y:-60,duration:1},'+=1')
+  .fromTo(scenes[2],{opacity:0,y:60,scale:.9},{opacity:1,y:0,scale:1,duration:1.2},'<0.3')
+  .to(bgs[2],{scale:1,duration:2},'<')
+  .to({},{duration:.8});
+
+/* ---- GALERÍA horizontal ---- */
+const gtrack = document.getElementById('gtrack');
+gsap.to(gtrack,{
+  x:()=> -(gtrack.scrollWidth - window.innerWidth + 60), ease:'none',
+  scrollTrigger:{trigger:'#gpin', start:'top top', end:()=>'+='+(gtrack.scrollWidth - window.innerWidth + 400),
+    pin:true, scrub:.8, invalidateOnRefresh:true}
+});
+
+/* ---- reveals ---- */
+gsap.utils.toArray('.reveal').filter(el=>!el.closest('.hero')).forEach(el=>{
+  gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 85%'}});
+});
+
+/* ---- parallax imágenes experiencia ---- */
+gsap.utils.toArray('.exp .pi').forEach(el=>{
+  gsap.to(el,{y:parseFloat(el.dataset.speed||0),ease:'none',
+    scrollTrigger:{trigger:'.exp',start:'top bottom',end:'bottom top',scrub:1}});
+});
+
+/* ---- imágenes del menú/galería: entrada ---- */
+gsap.utils.toArray('.mcard').forEach((c,i)=>{
+  gsap.from(c,{y:60,opacity:0,duration:.8,delay:(i%3)*.08,ease:'power3.out',
+    scrollTrigger:{trigger:c,start:'top 90%'}});
+});
+
+/* ---- logo hero: entrada, flotación y parallax ---- */
+gsap.to('.hero-mark',{y:35,scale:.96,ease:'none',
+  scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+
+/* ---- menú móvil ---- */
+const burger = document.getElementById('burger');
+const navlist = document.getElementById('navlist');
+burger.addEventListener('click', ()=>{
+  const open = navlist.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  navEl.classList.toggle('menu-open', open);
+  lenis.stop(); if(!open) lenis.start();
+});
+navlist.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navlist.classList.remove('open'); burger.classList.remove('open'); navEl.classList.remove('menu-open'); lenis.start();
+}));
+
+window.addEventListener('load',()=>ScrollTrigger.refresh());
+</script>
+
+<script>
+/* ---------- mapa interactivo / cómo llegar ---------- */
+(() => {
+  const modal = document.getElementById('mapModal');
+  const opener = document.getElementById('openMap');
+  if (!modal || !opener) return;
+
+  const panel = modal.querySelector('.map-panel');
+  const frame = document.getElementById('mapFrame');
+  const loading = document.getElementById('mapLoading');
+  const closeBtn = document.getElementById('mapClose');
+  const copyBtn = document.getElementById('mapCopy');
+  const MAP_SRC = 'https://www.google.com/maps?saddr=Universidad%20del%20Tolima%2C%20Ibagu%C3%A9%2C%20Colombia&daddr=La%20Isla%20caf%C3%A9%20picnic%2C%20Cra.%204c%20%2341-25%2C%20Ibagu%C3%A9%2C%20Tolima%2C%20Colombia&dirflg=w&z=16&hl=es&output=embed';
+  const ADDRESS = 'La isla café picnic — Cra 4c #41-25, La Macarena parte baja, Ibagué, Tolima, Colombia';
+
+  let lastFocus = null;
+  let mapLoaded = false;
+  let loadingTimer = 0;
+
+  /* ruta animada: la taza camina de la universidad al café */
+  const journeyPath = document.getElementById('journeyPath');
+  const journeyProgress = document.getElementById('journeyProgress');
+  const journeyCup = document.getElementById('journeyCup');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const JOURNEY_DURATION = 6800;
+  const journeyLength = journeyPath ? journeyPath.getTotalLength() : 0;
+  let journeyRaf = 0;
+  let journeyElapsed = 0;
+  let journeyLast = 0;
+
+  if (journeyProgress && journeyLength) {
+    journeyProgress.style.strokeDasharray = journeyLength + 'px';
+    journeyProgress.style.strokeDashoffset = journeyLength + 'px';
+  }
+
+  const easeJourney = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+  const paintJourney = (time) => {
+    if (!journeyPath || !journeyCup || !journeyProgress || !journeyLength) return;
+    const hold = .14;
+    const arrive = .78;
+    const raw = time <= hold ? 0 : time >= arrive ? 1 : (time - hold) / (arrive - hold);
+    const progress = easeJourney(raw);
+    const point = journeyPath.getPointAtLength(journeyLength * progress);
+    journeyCup.style.left = (point.x / 240 * 100) + '%';
+    journeyCup.style.top = (point.y / 44 * 100) + '%';
+    journeyProgress.style.strokeDashoffset = (journeyLength * (1 - progress)) + 'px';
+    journeyCup.style.opacity = time > .9 ? Math.max(0, 1 - (time - .9) / .1) : 1;
+  };
+
+  const tickJourney = (now) => {
+    if (!journeyLast) journeyLast = now;
+    journeyElapsed = (journeyElapsed + Math.min(now - journeyLast, 64)) % JOURNEY_DURATION;
+    journeyLast = now;
+    paintJourney(journeyElapsed / JOURNEY_DURATION);
+    journeyRaf = window.requestAnimationFrame(tickJourney);
+  };
+
+  const startJourney = () => {
+    if (!journeyPath || !journeyCup) return;
+    window.cancelAnimationFrame(journeyRaf);
+    journeyElapsed = 0;
+    journeyLast = 0;
+    if (reducedMotion) { paintJourney(.82); return; }
+    paintJourney(0);
+    journeyRaf = window.requestAnimationFrame(tickJourney);
+  };
+
+  const stopJourney = () => {
+    window.cancelAnimationFrame(journeyRaf);
+    journeyRaf = 0;
+    journeyLast = 0;
+  };
+
+  const lockScroll = () => {
+    document.documentElement.classList.add('map-open');
+    try { lenis.stop(); } catch (err) {}
+  };
+  const unlockScroll = () => {
+    document.documentElement.classList.remove('map-open');
+    try { lenis.start(); } catch (err) {}
+  };
+  const setBackgroundInert = (state) => {
+    [...document.body.children].forEach(el => {
+      if (el === modal || el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
+      el.inert = state;
+    });
+  };
+  const loadMap = () => {
+    if (mapLoaded) return;
+    mapLoaded = true;
+    const iframe = document.createElement('iframe');
+    iframe.src = MAP_SRC;
+    iframe.title = 'Ruta a pie desde la Universidad del Tolima hasta La isla café picnic';
+    iframe.loading = 'eager';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.addEventListener('load', () => {
+      clearTimeout(loadingTimer);
+      loading.classList.add('done');
+    });
+    frame.appendChild(iframe);
+    loadingTimer = window.setTimeout(() => loading.classList.add('done'), 7000);
+  };
+
+  const openMap = (event) => {
+    if (event) event.preventDefault();
+    lastFocus = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    setBackgroundInert(true);
+    lockScroll();
+    loadMap();
+    startJourney();
+    window.setTimeout(() => {
+      if (modal.classList.contains('open')) closeBtn.focus({ preventScroll: true });
+    }, 80);
+  };
+
+  const closeMap = () => {
+    if (!modal.classList.contains('open')) return;
+    modal.classList.remove('open');
+    stopJourney();
+    unlockScroll();
+    setBackgroundInert(false);
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus({ preventScroll: true });
+    window.setTimeout(() => {
+      if (!modal.classList.contains('open')) modal.setAttribute('aria-hidden', 'true');
+    }, 420);
+  };
+
+  opener.addEventListener('click', openMap);
+  closeBtn.addEventListener('click', closeMap);
+  modal.querySelector('[data-map-close]').addEventListener('click', closeMap);
+
+  document.addEventListener('keydown', (event) => {
+    if (!modal.classList.contains('open')) return;
+    if (event.key === 'Escape') { closeMap(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = [...panel.querySelectorAll('a[href], button:not([disabled])')]
+      .filter(el => el.offsetParent !== null);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !panel.contains(document.activeElement))) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  copyBtn.addEventListener('click', async () => {
+    const label = copyBtn.dataset.label || copyBtn.textContent;
+    copyBtn.dataset.label = label;
+    try {
+      await navigator.clipboard.writeText(ADDRESS);
+    } catch (err) {
+      const helper = document.createElement('textarea');
+      helper.value = ADDRESS;
+      helper.setAttribute('readonly', '');
+      helper.style.cssText = 'position:fixed;top:-1000px;left:0;opacity:0';
+      document.body.appendChild(helper);
+      helper.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      helper.remove();
+    }
+    copyBtn.textContent = '¡Dirección copiada!';
+    copyBtn.classList.add('copied');
+    clearTimeout(copyBtn.hideTimer);
+    copyBtn.hideTimer = window.setTimeout(() => {
+      copyBtn.textContent = label;
+      copyBtn.classList.remove('copied');
+    }, 2400);
+  });
+})();
+</script>
+</body>
+</html>

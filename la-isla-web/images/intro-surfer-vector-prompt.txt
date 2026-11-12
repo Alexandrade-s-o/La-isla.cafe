@@ -1,0 +1,9 @@
+Created with the built-in image generation tool, using the current adult surfer and the original La Isla logo as references.
+
+Use case: style-transfer.
+Input 1 is the approved human anatomy and surf pose reference. Input 2 is the La Isla logo and is the STRICT GRAPHIC STYLE reference.
+Redraw the SAME adult woman and surfboard from input 1 in the extremely simple, flat VECTOR ILLUSTRATION style of the logo in input 2.
+Preserve the graceful human adult proportions, slender long torso and limbs, natural hands and feet, pose and board from input 1. Keep long blue hair flowing behind, sunglasses and a blue one-piece swimsuit. Full body, complete board, facing right, both feet touching board.
+CRITICAL STYLE: exactly THREE FLAT SOLID COLORS, royal blue #2641A1, cream #FFF6E5 and golden yellow #EFA63F, on a truly transparent background. Blue silhouette shapes for hair and swimsuit, cream NEGATIVE-SPACE style skin shapes with elegant blue outlines or blue contour sections, yellow solid board with one cream stripe. Absolutely no skin-tone/tan/peach color, no gradients, no shadows, no realistic shading, no highlights, no texture, no glossy effects. Simple confident vector curves, few shapes, simplified face and hands but human believable anatomy. Think of a beautifully designed brand pictogram/illustration, matching the flat silhouette woman on the coffee cup in the logo. The person must look like an elegant adult, NOT a child or caricature. Avoid an oversized head.
+Compose as a clean standalone transparent cutout of ONLY woman AND surfboard. Keep the same wide 4:3 composition and complete figure of input 1 with margins. No water, no waves, no sun, no birds, no background circle, no logo or coffee cup, no text. Those elements will be added separately in the website.
+This is a simplification of the approved natural anatomy into the exact flat vector graphic language of the logo.

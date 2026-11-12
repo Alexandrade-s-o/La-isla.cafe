@@ -1,0 +1,12 @@
+Generated with the built-in image generation tool from the original logo and storefront sign.
+
+Use case: logo-brand / precise-object-edit.
+Asset type: clean recreated original café logo for the homepage hero.
+Input image 1: existing isolated original icon, primary reference for exact symbol.
+Input image 2: photograph of the actual La Isla storefront sign, primary reference for the full logo including lettering.
+Recreate the ORIGINAL "La Isla" café logo as a pristine high resolution flat vector-style brand badge. Faithfully reproduce the identity rather than inventing a new brand.
+Composition: circular warm ivory badge #FFF6E5, centered and perfectly front-facing, with all elements inside and ample breathing room. Transparent canvas outside the circle.
+Upper symbol: royal blue #2641A1 rounded coffee cup, handle on LEFT. A relaxed adult woman with long blue hair and sunglasses is reclining INSIDE the cup; her left arm bends up with hand behind head, her right arm rests on the cup rim. The cup covers her lower body exactly like the reference. Behind her to the LEFT stands one golden ochre #EFA63F palm tree, slender trunk, curved fronds. Preserve these unmistakable shapes and the original casual relaxed silhouette; refine the curves and small facial/hand details just enough for clean professional reproduction.
+Below symbol: large custom casual rounded hand-lettered royal blue wordmark EXACTLY "La Isla" (capital L, capital I) closely matching the tall playful letterforms in the storefront sign. Below that, smaller uppercase golden ochre text EXACTLY "CAFÉ PICNIC", centered, generously tracked, clean and readable. Spell CAFÉ with accent.
+Only flat vector shapes, crisp continuous curves, exactly royal blue/ochre/ivory colors. No gradients, no shading, no texture, no bevel, no mockup, no photographic surroundings, no drop shadow, no 3D, no additional symbols, no watermark. This is a faithful cleaned-up recreation of the actual café logo, not the surfing girl.
+Square output with entire circular badge comfortably inside the canvas (about 90% of canvas width). Perfectly round circle, transparent outside. Logo must be legible as a ~300px homepage badge.
