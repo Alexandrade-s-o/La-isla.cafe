@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — La Isla</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<style>
+@font-face{font-family:'Mali';src:url('fonts/Mali-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'Mali';src:url('fonts/Mali-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
+:root{--crema:#FFF6E5;--tinta:#1E2A44;--azul:#2447A6;--amarillo:#F4B942}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{min-height:100svh;display:grid;place-items:center;background:var(--crema);color:var(--tinta);font-family:'Mali','Trebuchet MS',sans-serif;text-align:center;padding:40px 22px;position:relative;overflow:hidden}
+.decor{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.sun{position:absolute;top:-90px;right:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(244,185,66,.55),rgba(244,185,66,0) 68%)}
+.shore{position:absolute;left:0;right:0;bottom:0;width:100%;height:min(24vh,190px)}
+.wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;max-width:460px}
+.logo{width:78px;height:78px;border-radius:50%;box-shadow:0 14px 30px rgba(30,42,68,.16)}
+.kicker{margin-top:26px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:var(--azul);opacity:.7}
+h1{margin-top:6px;font-size:clamp(96px,24vw,148px);line-height:.95;letter-spacing:-.03em;color:var(--azul)}
+h1 span{position:relative;display:inline-block;isolation:isolate}
+h1 span::after{content:"";position:absolute;left:1%;right:1%;bottom:.1em;height:.14em;background:var(--amarillo);border-radius:999px;transform:rotate(-2deg);z-index:-1}
+.msg{margin-top:12px;font-size:17px;line-height:1.55;color:var(--tinta);opacity:.78;max-width:34ch}
+.btn{margin-top:30px;display:inline-flex;align-items:center;gap:12px;background:var(--tinta);color:var(--crema);padding:15px 32px;border-radius:999px;font-weight:700;font-size:14px;transition:transform .25s,background .25s}
+.btn:hover{background:var(--azul);transform:translateY(-2px)}
+.btn svg{width:16px;height:16px}
+.foot{margin-top:34px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--azul);opacity:.45;font-weight:600}
+@media(max-width:480px){
+  .logo{width:66px;height:66px}
+  .msg{font-size:15.5px}
+  .foot{margin-top:26px}
+}
+</style>
+</head>
+<body>
+<div class="decor" aria-hidden="true">
+  <div class="sun"></div>
+  <svg class="shore" viewBox="0 0 1440 160" preserveAspectRatio="none">
+    <path d="M0 96C220 40 430 132 720 86S1180 22 1440 84V160H0Z" fill="#2447A6" opacity=".08"/>
+    <path d="M0 126C250 82 460 152 740 118S1200 70 1440 116V160H0Z" fill="#2447A6" opacity=".07"/>
+  </svg>
+</div>
+<main class="wrap">
+  <img class="logo" src="images/logo.svg" width="78" height="78" alt="La Isla">
+  <p class="kicker">Te saliste de la isla</p>
+  <h1><span>404</span></h1>
+  <p class="msg">Esta página no existe o se la llevó la marea. Vuelve al jardín y sigue sin afán.</p>
+  <a class="btn" href="/">Volver a la isla
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+  <p class="foot">La Isla · café picnic · Ibagué</p>
+</main>
+</body>
+</html>
